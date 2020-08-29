@@ -1,0 +1,23 @@
+import {Injectable} from '@angular/core';
+import {Adapter} from '../common/adapter';
+import {Game} from './game.model';
+
+export class Package {
+  constructor(
+    public data: Array<object>,
+    public messages: Array<object>,
+    public pagination: Array<object>,
+  ) {
+  }
+}
+@Injectable({
+  providedIn: 'root',
+})
+export class PackageAdapter implements Adapter<Package> {
+  adapt(item: any): Package {
+    return new Package(
+      item.data,
+      item.messages,
+      item.pagination);
+  }
+}

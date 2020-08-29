@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">New player</h4>
+  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="createPlayerForm" (ngSubmit)="onSubmit()" *ngIf="createPlayerForm" class="form">
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="name">How do you want other players to call you?</label>
+      <input type="text" formControlName="name" id="name" class="form-control">
+      <div *ngIf="createPlayerFormData.name.invalid && createPlayerFormData.name.dirty else regularText" class="alert-danger">
+        <span>Name is invalid</span>
+      </div>
+      <ng-template #regularText>
+        <div *ngIf="createPlayerFormData.name.invalid else joinText" class="alert-info">
+          <span><i>Enter a (user)name (2-20 chars)</i></span>
+        </div>
+      </ng-template>
+      <ng-template #joinText>
+        <div class="alert-info">
+          <span><i>Hit [Save!] when you're done</i></span>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button [disabled]="isLoading" type="button" class="btn btn-secondary" (click)="modal.close('Cancel')">Cancel</button>
+    <button [disabled]="isLoading || createPlayerFormData.name.invalid" type="submit" class="btn btn-primary">&nbsp;&nbsp;&nbsp;Save!&nbsp;&nbsp;&nbsp;</button>
+  </div>
+</form>
+

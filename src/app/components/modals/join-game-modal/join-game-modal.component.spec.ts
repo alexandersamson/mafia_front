@@ -1,0 +1,25 @@
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { JoinGameModalComponent } from './join-game-modal.component';
+
+describe('JoinGameModalComponent', () => {
+  let component: JoinGameModalComponent;
+  let fixture: ComponentFixture<JoinGameModalComponent>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ JoinGameModalComponent ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(JoinGameModalComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

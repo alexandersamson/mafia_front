@@ -1,0 +1,32 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Join game</h4>
+  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form [formGroup]="editForm" (ngSubmit)="onSubmit()" *ngIf="editForm" class="form">
+  <div class="modal-body">
+      <div class="form-group">
+        <label for="pinCode">This game requires a pin code.</label>
+        <input type="text" formControlName="pinCode" id="pinCode" class="form-control">
+        <div *ngIf="editFormData.pinCode.invalid && editFormData.pinCode.dirty else regularText" class="alert-danger">
+          <span>Pin code is invalid</span>
+        </div>
+        <ng-template #regularText>
+          <div *ngIf="editFormData.pinCode.invalid else joinText" class="alert-info">
+            <span><i>Enter the pin code for this game</i></span>
+          </div>
+        </ng-template>
+        <ng-template #joinText>
+          <div class="alert-info">
+            <span><i>Hit [Join!] when you're done</i></span>
+          </div>
+        </ng-template>
+      </div>
+  </div>
+  <div class="modal-footer">
+    <button [disabled]="isLoading" type="button" class="btn btn-secondary" (click)="modal.close('cancel')">Cancel</button>
+    <button [disabled]="isLoading || editFormData.pinCode.invalid" type="submit" class="btn btn-primary">&nbsp;&nbsp;&nbsp;Join!&nbsp;&nbsp;&nbsp;</button>
+  </div>
+</form>
+

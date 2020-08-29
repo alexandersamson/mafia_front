@@ -1,0 +1,25 @@
+<div class="row game-div">
+  <div class="col-md-3">
+    <span class="col-2  d-md-none">Game</span>
+    <div><h5>{{game.name}}</h5></div>
+  </div>
+  <div class="col-md-1">
+    <span class="col-2  d-md-none">Seats</span>
+    <h5>{{(game.availableSlots+game.usedSlots)}}</h5>
+  </div>
+  <div class="col-md-4">
+    <span class="col-2 d-md-none">Factions</span>
+    <div><app-divider-bar [barData]="barData"></app-divider-bar></div>
+    <a href="#" class="badge badge-dark badge-custom" style="background: {{faction.color}}80;" *ngFor="let faction of game.factions">{{faction.name}}</a>
+  </div>
+  <div class="col-md-2">
+    <span class="col-2  d-md-none">Creator</span>
+    <a href="#" class="badge badge-light">{{game.creatorName}}</a>
+  </div>
+  <div class="col-md-2">
+    <span class="col-2  d-md-none">Join</span>
+    <button (click)="joinGame(game)" type="button" class="btn btn-primary">
+      <b>Join game </b><span class="badge badge-light">{{game.usedSlots}}/{{(game.availableSlots+game.usedSlots)}}</span>
+    </button>
+  </div>
+</div>

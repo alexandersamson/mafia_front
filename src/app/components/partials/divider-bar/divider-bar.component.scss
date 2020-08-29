@@ -1,0 +1,19 @@
+.miniBar {
+  height: 1.5rem;
+  position: relative;
+  width: -webkit-calc(100% - 2rem);
+  width: -moz-calc(100% - 2rem);
+  width: calc(100% - 2rem);
+  margin-right: 0.5rem;
+}
+
+.miniSegment {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  opacity: 0.65;
+}
+
+.miniSegment:hover {
+  opacity: 1;
+}

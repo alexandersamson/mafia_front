@@ -1,0 +1,9 @@
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav nav-pills">
+  <a class="navbar-brand" routerLink="/"><img width="134" height="32" alt="" src="assets/img/mafia-logo-small.png"></a>
+  <li [ngbNavItem]="1">
+    <a ngbNavLink routerLink="">Home</a>
+  </li>
+  <li [ngbNavItem]="2">
+    <a ngbNavLink routerLink="public-games">Games</a>
+  </li>
+</ul>

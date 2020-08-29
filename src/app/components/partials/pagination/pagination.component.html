@@ -1,0 +1,3 @@
+<p *ngIf="pagination">
+  <ngb-pagination [collectionSize]="pagination.totalItems" [(page)]="pagination.page" [pageSize]="pagination.itemsPerPage" aria-label="{{pagination.objectName}}"></ngb-pagination>
+</p>
