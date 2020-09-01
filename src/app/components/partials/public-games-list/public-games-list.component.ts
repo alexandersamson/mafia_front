@@ -1,7 +1,7 @@
 import {Component, OnInit, Output, EventEmitter, OnDestroy} from '@angular/core';
 import {ApiService} from '../../../services/api.service';
 import {Package, PackageAdapter} from '../../../models/package.model';
-import {Game, GameAdapter} from '../../../models/game.model';
+import {Game, GameAdapter} from '../../../models/game-models/game.model';
 import {Pagination, PaginationAdapter} from '../../../models/pagination.model';
 import {ApiCall} from '../../../models/api-call.model';
 import {Globals} from '../../../common/globals';

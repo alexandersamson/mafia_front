@@ -4,6 +4,16 @@
   line-height: 1rem;
   font-size: 1.5rem;
 }
+
 .menu-bar{
   margin-bottom: 15px;
+}
+
+.menu-backdrop{
+  background-color: #181818;
+  opacity: 0.90;
+  height: 60px;
+  -webkit-box-shadow: 0px 0px 6px 4px rgba(16,16,16,0.9);
+  -moz-box-shadow: 0px 0px 6px 4px rgba(16,16,16,0.9);
+  box-shadow: 0px 0px 6px 4px rgba(16,16,16,0.9);
 }

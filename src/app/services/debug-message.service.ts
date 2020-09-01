@@ -12,14 +12,18 @@ export class DebugMessageService {
   maxMessages = 100;
   constructor() { }
 
-  public addMessagesToBuffer($messages): void{
+  public addMessagesToBuffer($messages): void {
+    if ($messages && $messages[0]){
       $messages.forEach(x => {
         this.debugMessageStack[this.pointer] = (new DebugMessage(x.type, x.message));
         this.debugMessageStack[0] = new DebugMessage(null, null, this.pointer);
         this.pointer += 1;
-        if (this.pointer > this.maxMessages){this.pointer = 1; }
+        if (this.pointer > this.maxMessages) {
+          this.pointer = 1;
+        }
       });
       this.messagesToObserverable();
+  }
   }
 
   public messagesToObserverable(){

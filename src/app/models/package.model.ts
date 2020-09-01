@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Adapter} from '../common/adapter';
-import {Game} from './game.model';
+import {Game} from './game-models/game.model';
 
 export class Package {
   constructor(

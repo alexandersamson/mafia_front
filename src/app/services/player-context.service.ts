@@ -28,8 +28,8 @@ export class PlayerContextService {
     return this.apiService.getData(apiCall);
   }
 
-  public getPlayerPackage(): Observable<Package> {
-    const apiCall = new ApiCall(Globals.getPlayerPackage);
+  public getCpGameOverview(): Observable<Package> {
+    const apiCall = new ApiCall(Globals.getCpGameOverview);
     return this.apiService.getData(apiCall);
   }
 

@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Game} from '../../../models/game.model';
+import {Game} from '../../../models/game-models/game.model';
 import { PowerLevelsToProgressService } from '../../../services/power-levels-to-progress.service';
 import {ProgressBar} from '../../../models/progress-bar.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';

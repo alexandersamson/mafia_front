@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import {Package, PackageAdapter} from '../models/package.model';
 import {DebugMessageService} from './debug-message.service';
 import {PlayerCookiesService} from './player-cookies.service';
+import {Meta} from '../models/payload-models/meta.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +28,9 @@ export class ApiService {
     return this.http.post(this.url, JSON.stringify(apiCall)).pipe(
       map((data: Package) => {
         this.debugMsgService.addMessagesToBuffer(data.messages);
-        if (data.meta.version){
-          this.apiVersion = data.meta.version;
+        if (data.meta){
+          const meta = new Meta(data.meta);
+          this.apiVersion = meta.version;
         }
         return this.adapter.adapt(data);
       }));

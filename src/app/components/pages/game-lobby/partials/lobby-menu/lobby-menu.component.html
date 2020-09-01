@@ -1,4 +1,5 @@
-<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav nav-pills menu-bar fixed-bottom justify-content-center">
+<div class="fixed-bottom justify-content-center d-block menu-backdrop" [(style.height.px)]="backDropHeight"></div>
+<ul ngbNav #lobbymenu #nav="ngbNav" [(activeId)]="active" class="nav nav-pills menu-bar fixed-bottom justify-content-center">
   <li [ngbNavItem]="1">
     <a ngbNavLink routerLink="overview"><bi name="house-fill" class="menu-icon text-light text-md-center"></bi></a>
   </li>

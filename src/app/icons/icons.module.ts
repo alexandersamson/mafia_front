@@ -14,7 +14,11 @@ import {
   InfoCircleFill,
   LightningFill,
   XCircleFill,
-  FileEarmarkCheckFill
+  FileEarmarkCheckFill,
+  QuestionOctagon,
+  HourglassSplit,
+  Check2Circle
+
 } from 'ng-bootstrap-icons/icons';
 
 const icons = {
@@ -30,7 +34,10 @@ const icons = {
   GearFill,
   InfoCircleFill,
   XCircleFill,
-  FileEarmarkCheckFill //Voting
+  FileEarmarkCheckFill, // Voting
+  QuestionOctagon,
+  HourglassSplit,
+  Check2Circle
 };
 
 @NgModule({

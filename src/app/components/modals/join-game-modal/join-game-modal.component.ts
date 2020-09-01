@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Game} from '../../../models/game.model';
+import {Game} from '../../../models/game-models/game.model';
 import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {JoinGamePayload} from '../../../models/payload-models/join-game-payload.model';

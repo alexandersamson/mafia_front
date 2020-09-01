@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import { Adapter } from '../common/adapter';
-import {Faction} from './faction.model';
-import {Player} from './player.model';
+import { Adapter } from '../../common/adapter';
+import {Faction} from '../faction.model';
+import {Player} from '../player.model';
+import {GamePhase} from '../game-phase.model';
 
 export class Game {
   constructor(
@@ -9,9 +10,12 @@ export class Game {
     public gid: string,
     public name: string,
     public status: string,
-    public countDays: number = 0,
-    public countNights: number = 0,
-    public startPhase: string = '',
+    public countDays: number,
+    public hostKeepsTime: boolean,
+    public pausedTimeLeft: number,
+    public nextPhaseTimestamp: number,
+    public startPhase: GamePhase,
+    public currentPhase: GamePhase,
     public isPublicListed: boolean,
     public pinCode: string = '',
     public hasPinCode: boolean = true,
@@ -37,8 +41,11 @@ export class Game {
       item.name,
       item.status,
       item.countDays,
-      item.countNights,
+      item.hostKeepsTime,
+      item.pausedTimeLeft,
+      item.nextPhaseTimestamp,
       item.startPhase,
+      item.currentPhase,
       item.isPublicListed,
       item.pinCode,
       item.hasPinCode,
