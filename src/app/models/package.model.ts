@@ -7,6 +7,7 @@ export class Package {
     public data: Array<object>,
     public messages: Array<object>,
     public pagination: Array<object>,
+    public meta: Array<object>
   ) {
   }
 }
@@ -18,6 +19,7 @@ export class PackageAdapter implements Adapter<Package> {
     return new Package(
       item.data,
       item.messages,
-      item.pagination);
+      item.pagination,
+      item.meta);
   }
 }

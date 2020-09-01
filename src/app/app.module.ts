@@ -22,6 +22,21 @@ import { CreateGameComponent } from './components/pages/create-game/create-game.
 import { GameLobbyComponent } from './components/pages/game-lobby/game-lobby.component';
 import { FooterComponent } from './components/partials/footer/footer.component';
 import { CreatePlayerModalComponent } from './components/modals/create-player-modal/create-player-modal.component';
+import { LobbyMenuComponent } from './components/pages/game-lobby/partials/lobby-menu/lobby-menu.component';
+import { LobbyBodyComponent } from './components/pages/game-lobby/partials/lobby-body/lobby-body.component';
+import { LobbyBodyPlayersContainerComponent } from './components/pages/game-lobby/partials/lobby-body-players-container/lobby-body-players-container.component';
+import { LobbyBodyPlayersContainerPlayerComponent } from './components/pages/game-lobby/partials/lobby-body-players-container-player/lobby-body-players-container-player.component';
+import { ModalBaseTemplateComponent } from './components/modals/base-template/modal-base-template.component';
+import { OverviewComponent } from './components/pages/game-lobby/sub-pages/overview/overview.component';
+import { MyRoleComponent } from './components/pages/game-lobby/sub-pages/my-role/my-role.component';
+import { HostActionsComponent } from './components/pages/game-lobby/sub-pages/host-actions/host-actions.component';
+import { PlayerActionsComponent } from './components/pages/game-lobby/sub-pages/player-actions/player-actions.component';
+import { GameInfoComponent } from './components/pages/game-lobby/sub-pages/game-info/game-info.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {IconsModule} from './icons/icons.module';
+import { ExitGameComponent } from './components/pages/game-lobby/sub-pages/exit-game/exit-game.component';
+import { LobbyFooterComponent } from './components/pages/game-lobby/partials/lobby-footer/lobby-footer.component';
+import { LobbyHeaderComponent } from './components/pages/game-lobby/partials/lobby-header/lobby-header.component';
 
 
 @NgModule({
@@ -41,15 +56,30 @@ import { CreatePlayerModalComponent } from './components/modals/create-player-mo
     CreateGameComponent,
     GameLobbyComponent,
     FooterComponent,
-    CreatePlayerModalComponent
+    CreatePlayerModalComponent,
+    LobbyMenuComponent,
+    LobbyBodyComponent,
+    LobbyBodyPlayersContainerComponent,
+    LobbyBodyPlayersContainerPlayerComponent,
+    ModalBaseTemplateComponent,
+    OverviewComponent,
+    MyRoleComponent,
+    HostActionsComponent,
+    PlayerActionsComponent,
+    GameInfoComponent,
+    ExitGameComponent,
+    LobbyFooterComponent,
+    LobbyHeaderComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule,
-    HttpClientModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        NgbModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        NoopAnimationsModule,
+        IconsModule
+    ],
   providers: [
     CookieService
   ],

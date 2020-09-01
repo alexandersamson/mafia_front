@@ -1,32 +1,36 @@
-<div class="modal-header">
-  <h4 class="modal-title" id="modal-basic-title">Join game</h4>
-  <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<form [formGroup]="editForm" (ngSubmit)="onSubmit()" *ngIf="editForm" class="form">
-  <div class="modal-body">
-      <div class="form-group">
-        <label for="pinCode">This game requires a pin code.</label>
-        <input type="text" formControlName="pinCode" id="pinCode" class="form-control">
-        <div *ngIf="editFormData.pinCode.invalid && editFormData.pinCode.dirty else regularText" class="alert-danger">
-          <span>Pin code is invalid</span>
-        </div>
-        <ng-template #regularText>
-          <div *ngIf="editFormData.pinCode.invalid else joinText" class="alert-info">
-            <span><i>Enter the pin code for this game</i></span>
+<app-modal-base-template>
+  <div class="m-header">
+    <h4 class="modal-title" id="modal-basic-title">Join game</h4>
+  </div>
+  <div class="m-body">
+    <div class="jumbotron bg-dark text-center" *ngIf="!game.hasPinCode">
+      <h2>Entering lobby</h2>
+    </div>
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()" *ngIf="editForm" class="form">
+      <div class="modal-body">
+          <div class="form-group">
+            <label for="pinCode">This game requires a pin code.</label>
+            <input type="text" formControlName="pinCode" id="pinCode" class="form-control">
+            <div *ngIf="editFormData.pinCode.invalid && editFormData.pinCode.dirty else regularText" class="text-danger">
+              <span><b>Pin code is invalid</b></span>
+            </div>
+            <ng-template #regularText>
+              <div *ngIf="editFormData.pinCode.invalid else joinText" class="text-secondary">
+                <span><i>Enter the pin code for this game</i></span>
+              </div>
+            </ng-template>
+            <ng-template #joinText>
+              <div class="text-info">
+                <span><i>Hit <b>Join</b> when you're done</i></span>
+              </div>
+            </ng-template>
           </div>
-        </ng-template>
-        <ng-template #joinText>
-          <div class="alert-info">
-            <span><i>Hit [Join!] when you're done</i></span>
-          </div>
-        </ng-template>
       </div>
+    </form>
   </div>
-  <div class="modal-footer">
-    <button [disabled]="isLoading" type="button" class="btn btn-secondary" (click)="modal.close('cancel')">Cancel</button>
-    <button [disabled]="isLoading || editFormData.pinCode.invalid" type="submit" class="btn btn-primary">&nbsp;&nbsp;&nbsp;Join!&nbsp;&nbsp;&nbsp;</button>
+  <div class="m-footer">
+    <button [disabled]="isLoading || !game.hasPinCode" type="button" class="btn btn-secondary mr-1" (click)="modal.close('cancel')">Cancel</button>
+    <button [disabled]="isLoading || !formIsValid || !game.hasPinCode" type="button" (click)="onSubmit()" class="btn btn-primary">&nbsp;&nbsp;&nbsp;Join&nbsp;&nbsp;&nbsp;</button>
   </div>
-</form>
+</app-modal-base-template>
 

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Game} from '../../../models/game.model';
 import { PowerLevelsToProgressService } from '../../../services/power-levels-to-progress.service';
 import {ProgressBar} from '../../../models/progress-bar.model';
@@ -9,6 +9,7 @@ import {CreatePlayerModalComponent} from '../../modals/create-player-modal/creat
 import {CurrentPlayer} from '../../../models/current-player.model';
 import {Router} from '@angular/router';
 import {Globals} from '../../../common/globals';
+import {Subscription} from 'rxjs';
 
 
 @Component({
@@ -16,30 +17,41 @@ import {Globals} from '../../../common/globals';
   templateUrl: './public-game.component.html',
   styleUrls: ['./public-game.component.scss']
 })
-export class PublicGameComponent implements OnInit {
+export class PublicGameComponent implements OnInit, OnDestroy {
+  private subscription: Subscription = new Subscription();
   @Input() game: Game;
   public barData: Array<ProgressBar>;
+  public isLoading = false;
 
-  constructor(private router: Router, private powerlevelToProgress: PowerLevelsToProgressService, private modalService: NgbModal, private playerContext: PlayerContextService) { }
+  constructor(
+    private router: Router,
+    private powerlevelToProgress: PowerLevelsToProgressService,
+    private modalService: NgbModal,
+    private playerContext: PlayerContextService
+  ) { }
 
   ngOnInit(): void {
     this.barData = this.powerlevelToProgress.getProgressBarData(this.game.factions);
   }
 
   joinGame(game: Game): void{
-    if (!this.playerContext.getCurrentPlayer()){
-      const ref = this.modalService.open(CreatePlayerModalComponent);
-      ref.componentInstance.currentPlayer = new CurrentPlayer();
-      ref.result.then((yes) => {
-        // TODO: Check if user was properly created (yes == true)
-          this.invokeJoinGameModal(game);
-        },
-        (cancel) => {
-          // do nothing
-        });
-    } else {
-      this.invokeJoinGameModal(game);
-    }
+    this.isLoading = true;
+    this.subscription.add(this.playerContext.checkForPlayerLogin().subscribe(packet => {
+        if (packet == null || !packet.data[0].hasOwnProperty('name')){
+        const ref = this.modalService.open(CreatePlayerModalComponent);
+        ref.componentInstance.currentPlayer = new CurrentPlayer();
+        ref.result.then((yes) => {
+            this.invokeJoinGameModal(game);
+          },
+          (cancel) => {});
+      } else {
+        this.invokeJoinGameModal(game);
+      }
+    }, error => {
+      console.log(error);
+    }, () => {
+      this.isLoading = false;
+    }));
   }
 
   invokeJoinGameModal(game: Game): void{
@@ -57,6 +69,10 @@ export class PublicGameComponent implements OnInit {
     (cancel) => {
       // do nothing
     });
+  }
+
+  ngOnDestroy(): void{
+    this.subscription.unsubscribe();
   }
 
 }

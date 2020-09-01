@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Game} from '../../../models/game.model';
 import { NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -7,14 +7,17 @@ import {ApiCall} from '../../../models/api-call.model';
 import {Globals} from '../../../common/globals';
 import {PlayerContextService} from '../../../services/player-context.service';
 import {ApiService} from '../../../services/api.service';
+import {Subscription} from 'rxjs';
+import {ModalBaseTemplateComponent} from '../base-template/modal-base-template.component';
 
 @Component({
   selector: 'app-join-game-modal',
   templateUrl: './join-game-modal.component.html',
   styleUrls: ['./join-game-modal.component.scss']
 })
-export class JoinGameModalComponent implements OnInit {
+export class JoinGameModalComponent implements OnInit, OnDestroy {
 
+  private subscription: Subscription = new Subscription();
   game: Game;
   editForm: FormGroup;
   isLoading: boolean;
@@ -24,35 +27,62 @@ export class JoinGameModalComponent implements OnInit {
   constructor(public modal: NgbActiveModal,
               private formBuilder: FormBuilder,
               private playerContext: PlayerContextService,
-              private apiService: ApiService) { }
-
-  ngOnInit(): void {
-    console.log(this.game);
-    this.setForm();
+              private apiService: ApiService) {
   }
 
-  onSubmit(): void{
-    if (this.editForm.invalid || this.isLoading){
-      return;
+  ngOnInit(): void {
+    if (!this.game.hasPinCode){
+      this.byPassJoin();
+    } else {
+      this.setForm();
     }
-    this.joinGamePayload = new JoinGamePayload(this.editForm.value.gid, this.editForm.value.pinCode);
-    this.apiCall = new ApiCall(Globals.apiKey, Globals.joinGameCall, this.joinGamePayload, this.playerContext.getCurrentPlayer());
+  }
+
+  byPassJoin(): void{
+    this.joinGamePayload = new JoinGamePayload(this.game.gid, null);
+    this.apiCall = new ApiCall(Globals.joinGameCall, this.joinGamePayload);
     this.isLoading = true;
-    this.apiService.getData(this.apiCall).subscribe(x => {
-      console.log(x);
+    this.subscription.add(this.apiService.getData(this.apiCall).subscribe(x => {
       this.isLoading = false;
-      if (x.data === undefined) {
-        console.log('FALSE!');
+      if (x.data == null) {
         this.modal.close(false);
+
       }
       this.modal.close(true);
     }, error => {
       console.log(error);
       this.isLoading = false;
-    });
+    }));
   }
 
-  get editFormData(): object { return this.editForm.controls; }
+  onSubmit(bypass = false): void{
+    if (this.editForm.invalid || this.isLoading){
+      return;
+    }
+    this.joinGamePayload = new JoinGamePayload(this.game.gid, this.editForm.value.pinCode);
+    this.apiCall = new ApiCall(Globals.joinGameCall, this.joinGamePayload);
+    this.isLoading = true;
+    this.subscription.add(this.apiService.getData(this.apiCall).subscribe(x => {
+      this.isLoading = false;
+      if (x.data == null) {
+        this.modal.close(false);
+
+      }
+      this.modal.close(true);
+    }, error => {
+      console.log(error);
+      this.isLoading = false;
+    }));
+
+  }
+
+  get editFormData(): object {
+    return this.editForm.controls;
+  }
+
+  get formIsValid(): boolean{
+    return !this.editForm.invalid;
+  }
 
   private setForm(): void{
     this.editForm = this.formBuilder.group({
@@ -60,6 +90,10 @@ export class JoinGameModalComponent implements OnInit {
       gid: [this.game.gid],
       pinCode: [this.game.pinCode, Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(10)])]
     });
+  }
+
+  ngOnDestroy(): void{
+    this.subscription.unsubscribe();
   }
 
 }

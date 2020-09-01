@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Globals} from '../../../common/globals';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -8,9 +9,13 @@ import {Globals} from '../../../common/globals';
 })
 export class FooterComponent implements OnInit {
   apiUrl = Globals.apiURL;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  isInGameLobby(): boolean{
+    return this.router.url.startsWith('/' + Globals.gameLobbyPage);
   }
 
 }

@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="!isInGameLobby()" class="container fixed-bottom">
   <div class="jumbotron jumbotron-fluid text-center">
       Powered by
       <a href="{{apiUrl}}">

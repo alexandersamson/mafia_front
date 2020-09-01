@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import { Adapter } from '../common/adapter';
 import {Faction} from './faction.model';
+import {Player} from './player.model';
 
 export class Game {
   constructor(
@@ -13,8 +14,9 @@ export class Game {
     public startPhase: string = '',
     public isPublicListed: boolean,
     public pinCode: string = '',
-    public creatorPlayerId: number,
-    public creatorName: string = '',
+    public hasPinCode: boolean = true,
+    public creator: Player,
+    public host: Player,
     public createdOn: number,
     public deleted: boolean = false,
     public availableSlots: number,
@@ -39,8 +41,9 @@ export class Game {
       item.startPhase,
       item.isPublicListed,
       item.pinCode,
-      item.creatorPlayerId,
-      item.creatorName,
+      item.hasPinCode,
+      item.creator,
+      item.host,
       item.createdOn,
       item.deleted,
       item.availableSlots,
