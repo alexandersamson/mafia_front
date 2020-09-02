@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {GameOverview} from '../../../../../models/game-models/game-overview-model';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-lobby-header',
@@ -7,7 +8,16 @@ import {GameOverview} from '../../../../../models/game-models/game-overview-mode
   styleUrls: ['./lobby-header.component.scss']
 })
 export class LobbyHeaderComponent implements OnInit {
-  @Input() public gameOverview: GameOverview;
+   private $gameOverview = new BehaviorSubject<GameOverview>(new GameOverview(null));
+
+  @Input()
+  set gameOverview(value){
+    this.$gameOverview.next(value);
+  }
+
+  get gameOverview(): GameOverview{
+    return this.$gameOverview.getValue();
+  }
 
   constructor() { }
 
@@ -25,10 +35,9 @@ export class LobbyHeaderComponent implements OnInit {
       if (['vote', 'voteday', 'voting'].includes(this.gameOverview.currentPhase.name.toLowerCase())){
         return 'file-earmark-check-fill';
       }
-      if (this.gameOverview.currentPhase.isNight === true || this.gameOverview.currentPhase.isNight === '1'){
+      if (this.gameOverview.currentPhase.isNight === true){
         return 'moon';
-      }
-      if (this.gameOverview.currentPhase.isNight === false || this.gameOverview.currentPhase.isNight === '0'){
+      } else {
         return 'sun';
       }
     }

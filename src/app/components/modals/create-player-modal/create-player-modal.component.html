@@ -8,16 +8,16 @@
         <label for="name">What do you want other players to call you?</label>
         <input type="text" formControlName="name" id="name" class="form-control">
         <div *ngIf="createPlayerFormData.name.invalid && createPlayerFormData.name.dirty else regularText"
-             class="alert-danger">
+             class="text-danger">
           <span>Name is invalid.</span>
         </div>
         <ng-template #regularText>
-          <div *ngIf="createPlayerFormData.name.invalid else joinText" class="alert-info">
+          <div *ngIf="createPlayerFormData.name.invalid else joinText" class="text-secondary">
             <span><i>Enter a (user)name (2-20 chars).</i></span>
           </div>
         </ng-template>
         <ng-template #joinText>
-          <div class="alert-info">
+          <div class="text-secondary">
             <span><i>Hit [Save] when you're done.</i></span>
           </div>
         </ng-template>

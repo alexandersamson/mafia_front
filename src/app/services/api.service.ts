@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Observable, of, partition} from 'rxjs';
+import {BehaviorSubject, Observable, of, partition} from 'rxjs';
 import { ApiCall } from '../models/api-call.model';
 import { Globals } from '../common/globals';
 import { map } from 'rxjs/operators';
@@ -14,7 +14,8 @@ import {Meta} from '../models/payload-models/meta.model';
 })
 export class ApiService {
   url = Globals.apiURL;
-  private apiVersion = '';
+  errorMessages = new BehaviorSubject<Error[]>([null]);
+  private meta: Meta = new Meta({apiName: null, apiLink: null, version: null, timestamp: null});
 
   constructor(
     private http: HttpClient,
@@ -28,9 +29,12 @@ export class ApiService {
     return this.http.post(this.url, JSON.stringify(apiCall)).pipe(
       map((data: Package) => {
         this.debugMsgService.addMessagesToBuffer(data.messages);
+        if (data.error){
+            this.errorMessages.next(data.error as Error[]);
+            console.log(data.error);
+        }
         if (data.meta){
-          const meta = new Meta(data.meta);
-          this.apiVersion = meta.version;
+          this.meta = new Meta(data.meta);
         }
         return this.adapter.adapt(data);
       }));
@@ -45,6 +49,10 @@ export class ApiService {
   }
 
   getApiVersion(): Observable<string>{
-    return of(this.apiVersion);
+    return of(this.meta.apiName);
+  }
+
+  getTimestamp(): Observable<number>{
+    return of(this.meta.timestamp);
   }
 }

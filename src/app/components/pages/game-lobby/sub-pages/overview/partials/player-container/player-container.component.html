@@ -1,0 +1,9 @@
+<h6 class="card-header px-1 py-0 bg-primary text-light">PLAYERS</h6>
+<div class="card-body pt-1 pl-1 pr-1 pb-2">
+  <div class="card-text">
+    <span *ngFor="let player of ($playerOverview | async)">
+      <app-player-element [player]="player"></app-player-element>
+    </span>
+  </div>
+</div>
+

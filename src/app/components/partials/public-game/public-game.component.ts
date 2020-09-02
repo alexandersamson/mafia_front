@@ -6,7 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {JoinGameModalComponent} from '../../modals/join-game-modal/join-game-modal.component';
 import {PlayerContextService} from '../../../services/player-context.service';
 import {CreatePlayerModalComponent} from '../../modals/create-player-modal/create-player-modal.component';
-import {CurrentPlayer} from '../../../models/current-player.model';
+import {CurrentPlayer} from '../../../models/player-models/current-player.model';
 import {Router} from '@angular/router';
 import {Globals} from '../../../common/globals';
 import {Subscription} from 'rxjs';
@@ -36,8 +36,8 @@ export class PublicGameComponent implements OnInit, OnDestroy {
 
   joinGame(game: Game): void{
     this.isLoading = true;
-    this.subscription.add(this.playerContext.checkForPlayerLogin().subscribe(packet => {
-        if (packet == null || !packet.data[0].hasOwnProperty('name')){
+    this.subscription.add(this.playerContext.isLoggedIn().subscribe(isLoggedIn => {
+        if (!isLoggedIn){
         const ref = this.modalService.open(CreatePlayerModalComponent);
         ref.componentInstance.currentPlayer = new CurrentPlayer();
         ref.result.then((yes) => {
@@ -45,12 +45,23 @@ export class PublicGameComponent implements OnInit, OnDestroy {
           },
           (cancel) => {});
       } else {
-        this.invokeJoinGameModal(game);
+          this.subscription.add(
+            this.playerContext.getCurrentPlayer().subscribe( currentPlayer => {
+              if (currentPlayer.inGame.gid){
+                this.router.navigate([Globals.gameLobbyPage]);
+              } else {
+                this.invokeJoinGameModal(game);
+              }
+            }, error => {
+              console.log(error);
+            })
+          );
       }
     }, error => {
       console.log(error);
     }, () => {
       this.isLoading = false;
+      this.subscription.unsubscribe();
     }));
   }
 

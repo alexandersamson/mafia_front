@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {interval, pipe, Subscription} from 'rxjs';
 import {PlayerContextService} from '../../../services/player-context.service';
-import {mergeMap} from 'rxjs/operators';
+import {mergeMap, startWith} from 'rxjs/operators';
 import {GameOverview} from '../../../models/game-models/game-overview-model';
 
 @Component({
@@ -21,7 +21,7 @@ export class GameLobbyComponent implements OnInit, OnDestroy{
   }
 
   public startInterval(): void{
-    this.subscription.add(interval(1500).pipe(
+    this.subscription.add(interval(1500).pipe(startWith(0),
       mergeMap(() => this.playerContext.getCpGameOverview()
       )).subscribe(pack => {
         if (pack && pack.data && pack.data[0]){

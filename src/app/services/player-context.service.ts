@@ -4,32 +4,66 @@ import {ApiCall} from '../models/api-call.model';
 import {Globals} from '../common/globals';
 import {CookieService} from 'ngx-cookie-service';
 import {PlayerCookiesService} from './player-cookies.service';
-import {CurrentPlayer} from '../models/current-player.model';
-import {Player} from '../models/player.model';
+import {CurrentPlayer} from '../models/player-models/current-player.model';
+import {Player} from '../models/player-models/player.model';
 import {Package} from '../models/package.model';
-import {Observable, of, interval} from 'rxjs';
-import {flatMap, mergeMap, switchMap} from 'rxjs/operators';
+import {Observable, of, interval, Subscription, BehaviorSubject} from 'rxjs';
+import {flatMap, mergeMap, startWith, switchMap} from 'rxjs/operators';
+import {PlayerInGameOverview} from '../models/player-models/player-in-game-overview.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayerContextService {
   private playerIsLoggedIn: boolean;
+  private subscription: Subscription = new Subscription();
+  private $currentPlayer = new BehaviorSubject(new CurrentPlayer());
+
 
   constructor(private apiService: ApiService, private playerCookiesService: PlayerCookiesService) {
+    this.getCurrentPlayerDataInterval();
   }
 
-  public checkForPlayerLogin(): Observable<Package> {
+  public getCurrentPlayer(): Observable<CurrentPlayer> {
     const token = this.playerCookiesService.getPlayerToken();
+    console.log('requested getCurrentPlayer');
     if (token === '' || token === null || token === undefined) {
       return of(null);
     }
-    const apiCall = new ApiCall(Globals.getPlayerByToken);
-    return this.apiService.getData(apiCall);
+    return this.$currentPlayer as Observable<CurrentPlayer>;
   }
+
+  public isLoggedIn(): Observable<boolean>{
+    const player = this.$currentPlayer.getValue();
+    console.log('requested isLoggedIn');
+    if (player && player.id){
+      if (player.id > 0){
+        return of(true);
+      }
+    }
+    return of(false);
+  }
+
+  private getCurrentPlayerDataInterval(): void {
+    const apiCall = new ApiCall(Globals.getPlayerByToken);
+    this.subscription.add(
+      interval(1000).pipe(
+        startWith(0),
+        switchMap(
+          () => this.apiService.getData(apiCall)
+        )
+      ).subscribe(x => this.$currentPlayer.next( x.data[0] as CurrentPlayer))
+    );
+  }
+
 
   public getCpGameOverview(): Observable<Package> {
     const apiCall = new ApiCall(Globals.getCpGameOverview);
+    return this.apiService.getData(apiCall);
+  }
+
+  public getCpPlayersOverview(): Observable<Package> {
+    const apiCall = new ApiCall(Globals.getCpPlayersOverview);
     return this.apiService.getData(apiCall);
   }
 

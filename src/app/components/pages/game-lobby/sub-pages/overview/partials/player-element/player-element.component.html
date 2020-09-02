@@ -1,0 +1,4 @@
+<span class="text-nowrap  text-left badge w-100 label">
+  <span class="label-left text-light bg-primary p-1 px-2 {{(player.lastSeen + 60) < (apiService.getTimestamp() | async) ? 'offline' : ''}}">{{player.name}}<span class="discriminator">{{player.discriminator}}</span></span>
+  <span class="label-right text-dark p-1 px-2 {{!player.isAlive ? 'dead' : ''}} {{player.isHost ? 'host' : 'bg-light'}}">{{player.isHost ? 'Host' : player.isAlive ? 'Alive' : 'Dead'}}</span>
+</span>

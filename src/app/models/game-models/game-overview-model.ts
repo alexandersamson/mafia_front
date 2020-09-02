@@ -17,6 +17,7 @@ export class GameOverview {
   public usedSlots: number;
 
   public constructor(game: any) {
+    if (!game){ return null; }
     this.gid = game.gid ?? '';
     this.name = game.name ?? '[noname]';
     this.status = game.status ?? '[unknown]';

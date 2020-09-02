@@ -6,7 +6,7 @@ import {ApiCall} from '../../../models/api-call.model';
 import {Globals} from '../../../common/globals';
 import {PlayerContextService} from '../../../services/player-context.service';
 import {ApiService} from '../../../services/api.service';
-import {CurrentPlayer} from '../../../models/current-player.model';
+import {CurrentPlayer} from '../../../models/player-models/current-player.model';
 import {CookieService} from 'ngx-cookie-service';
 import {Subscription} from 'rxjs';
 import {ModalBaseTemplateComponent} from '../base-template/modal-base-template.component';
@@ -50,12 +50,13 @@ export class CreatePlayerModalComponent implements OnInit, OnDestroy {
         x.data[0][Globals.playerTokenPropertyAndCookieName].token,
         365, null, null, null, 'Strict'
       );
-      this.subscription.add(this.playerContext.checkForPlayerLogin().subscribe(packet => {
-        if (packet != null && packet.data[0].hasOwnProperty('name')){
+      this.subscription.add(this.playerContext.isLoggedIn().subscribe(isLoggedInData => {
+        console.log(isLoggedInData);
+        if (!isLoggedInData){
           this.isLoading = false;
-          this.modal.close();
+          this.modal.close(false);
         } else {
-          console.log(packet);
+          console.log(isLoggedInData);
         }
       }));
     }, error => {

@@ -24,8 +24,6 @@ import { FooterComponent } from './components/partials/footer/footer.component';
 import { CreatePlayerModalComponent } from './components/modals/create-player-modal/create-player-modal.component';
 import { LobbyMenuComponent } from './components/pages/game-lobby/partials/lobby-menu/lobby-menu.component';
 import { LobbyBodyComponent } from './components/pages/game-lobby/partials/lobby-body/lobby-body.component';
-import { LobbyBodyPlayersContainerComponent } from './components/pages/game-lobby/partials/lobby-body-players-container/lobby-body-players-container.component';
-import { LobbyBodyPlayersContainerPlayerComponent } from './components/pages/game-lobby/partials/lobby-body-players-container-player/lobby-body-players-container-player.component';
 import { ModalBaseTemplateComponent } from './components/modals/base-template/modal-base-template.component';
 import { OverviewComponent } from './components/pages/game-lobby/sub-pages/overview/overview.component';
 import { MyRoleComponent } from './components/pages/game-lobby/sub-pages/my-role/my-role.component';
@@ -37,6 +35,12 @@ import {IconsModule} from './icons/icons.module';
 import { ExitGameComponent } from './components/pages/game-lobby/sub-pages/exit-game/exit-game.component';
 import { LobbyFooterComponent } from './components/pages/game-lobby/partials/lobby-footer/lobby-footer.component';
 import { LobbyHeaderComponent } from './components/pages/game-lobby/partials/lobby-header/lobby-header.component';
+import { PlayerContainerComponent } from './components/pages/game-lobby/sub-pages/overview/partials/player-container/player-container.component';
+import { PlayerElementComponent } from './components/pages/game-lobby/sub-pages/overview/partials/player-element/player-element.component';
+import { EventContainerComponent } from './components/pages/game-lobby/sub-pages/overview/partials/event-container/event-container.component';
+import { ChatContainerComponent } from './components/pages/game-lobby/sub-pages/overview/partials/chat-container/chat-container.component';
+import { FactionChatContainerComponent } from './components/pages/game-lobby/sub-pages/overview/partials/faction-chat-container/faction-chat-container.component';
+import { RoleProfileContainerComponent } from './components/pages/game-lobby/sub-pages/my-role/partials/role-profile-container/role-profile-container.component';
 
 
 @NgModule({
@@ -59,8 +63,6 @@ import { LobbyHeaderComponent } from './components/pages/game-lobby/partials/lob
     CreatePlayerModalComponent,
     LobbyMenuComponent,
     LobbyBodyComponent,
-    LobbyBodyPlayersContainerComponent,
-    LobbyBodyPlayersContainerPlayerComponent,
     ModalBaseTemplateComponent,
     OverviewComponent,
     MyRoleComponent,
@@ -69,7 +71,13 @@ import { LobbyHeaderComponent } from './components/pages/game-lobby/partials/lob
     GameInfoComponent,
     ExitGameComponent,
     LobbyFooterComponent,
-    LobbyHeaderComponent
+    LobbyHeaderComponent,
+    PlayerContainerComponent,
+    PlayerElementComponent,
+    EventContainerComponent,
+    ChatContainerComponent,
+    FactionChatContainerComponent,
+    RoleProfileContainerComponent
   ],
     imports: [
         BrowserModule,

@@ -8,6 +8,7 @@ export class Globals {
   public static getPlayerByToken = 'getPlayerByToken';
   public static getPlayerPackage = 'getPlayerPackage';
   public static getCpGameOverview = 'cp_get_game_overview';
+  public static getCpPlayersOverview = 'cp_get_players_game_overview';
   public static playerIsValid = 'getPlayerIsValid';
   public static createPlayerCall = 'createPlayer';
   public static getJoinableGamesPageCall = 'getJoinableGamesPage';

@@ -17,7 +17,7 @@ export class NavMainMenuComponent implements OnInit {
   constructor(private playerContextService: PlayerContextService, private router: Router) { }
 
   ngOnInit(): void {
-    this.playerContextService.checkForPlayerLogin().subscribe();
+    this.playerContextService.getCurrentPlayer().subscribe();
   }
 
   isInGameLobby(): boolean{

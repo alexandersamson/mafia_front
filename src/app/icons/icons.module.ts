@@ -17,7 +17,8 @@ import {
   FileEarmarkCheckFill,
   QuestionOctagon,
   HourglassSplit,
-  Check2Circle
+  Check2Circle,
+  WifiOff
 
 } from 'ng-bootstrap-icons/icons';
 
@@ -37,7 +38,8 @@ const icons = {
   FileEarmarkCheckFill, // Voting
   QuestionOctagon,
   HourglassSplit,
-  Check2Circle
+  Check2Circle,
+  WifiOff,
 };
 
 @NgModule({
