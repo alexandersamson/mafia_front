@@ -1,0 +1,20 @@
+<div class="selected-roles-container">
+  <ng-container *ngIf="selectedRoles && selectedRoles.length > 0; else empty">
+    <ng-container *ngFor="let role of selectedRoles">
+      <div class="d-inline-block">
+        <span class="badge ml-1 badge-dark role-remove" (click)="callParentRemove(role?.rid)">
+          <bi class="control-icon" name="dash-square-fill"></bi>
+        </span>
+        <span class="badge badge-dark role-add" (click)="callParentAdd(role?.rid)">
+          <bi class="control-icon" name="plus-square-fill"></bi>
+        </span>
+        <span class="badge my-1 py-2 badge-dark role-name" style="background-color: {{role?.faction.color}}">
+          {{role?.count}}&times; {{role?.name}}
+        </span>
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-template #empty>
+    <span class="p-2 text-info"><i>Select at least 3 roles from at least 2 different factions from the list below</i></span>
+  </ng-template>
+</div>

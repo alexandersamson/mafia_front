@@ -1,14 +1,14 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Game} from '../../../models/game-models/game.model';
-import { PowerLevelsToProgressService } from '../../../services/power-levels-to-progress.service';
-import {ProgressBar} from '../../../models/progress-bar.model';
+import {Game} from '../../../../models/game-models/game.model';
+import { PowerLevelsToProgressService } from '../../../../services/power-levels-to-progress.service';
+import {ProgressBar} from '../../../../models/progress-bar.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {JoinGameModalComponent} from '../../modals/join-game-modal/join-game-modal.component';
-import {PlayerContextService} from '../../../services/player-context.service';
-import {CreatePlayerModalComponent} from '../../modals/create-player-modal/create-player-modal.component';
-import {CurrentPlayer} from '../../../models/player-models/current-player.model';
+import {JoinGameModalComponent} from '../../../modals/join-game-modal/join-game-modal.component';
+import {PlayerContextService} from '../../../../services/player-context.service';
+import {CreatePlayerModalComponent} from '../../../modals/create-player-modal/create-player-modal.component';
+import {CurrentPlayer} from '../../../../models/player-models/current-player.model';
 import {Router} from '@angular/router';
-import {Globals} from '../../../common/globals';
+import {Globals} from '../../../../common/globals';
 import {Subscription} from 'rxjs';
 
 
@@ -27,7 +27,7 @@ export class PublicGameComponent implements OnInit, OnDestroy {
     private router: Router,
     private powerlevelToProgress: PowerLevelsToProgressService,
     private modalService: NgbModal,
-    private playerContext: PlayerContextService
+    public playerContext: PlayerContextService
   ) { }
 
   ngOnInit(): void {

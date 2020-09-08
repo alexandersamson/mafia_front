@@ -5,18 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
-import {CookieService} from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service';
 import { HomeComponent } from './components/pages/home/home.component';
 import { PublicGamesComponent } from './components/pages/public-games/public-games.component';
 import { PaginationComponent } from './components/partials/pagination/pagination.component';
 import { MainComponent } from './components/main/main.component';
 import { NavMainMenuComponent } from './components/partials/nav-main-menu/nav-main-menu.component';
-import { PublicGamesListComponent } from './components/partials/public-games-list/public-games-list.component';
-import { PublicGameComponent } from './components/partials/public-game/public-game.component';
+import { PublicGamesListComponent } from './components/pages/public-games/public-games-list/public-games-list.component';
+import { PublicGameComponent } from './components/pages/public-games/public-game/public-game.component';
 import { WithLoadingPipe } from './pipes/with-loading.pipe';
 import { DividerBarComponent } from './components/partials/divider-bar/divider-bar.component';
 import { JoinGameModalComponent } from './components/modals/join-game-modal/join-game-modal.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { InfoPageComponent } from './components/pages/info-page/info-page.component';
 import { CreateGameComponent } from './components/pages/create-game/create-game.component';
 import { GameLobbyComponent } from './components/pages/game-lobby/game-lobby.component';
@@ -31,7 +31,7 @@ import { HostActionsComponent } from './components/pages/game-lobby/sub-pages/ho
 import { PlayerActionsComponent } from './components/pages/game-lobby/sub-pages/player-actions/player-actions.component';
 import { GameInfoComponent } from './components/pages/game-lobby/sub-pages/game-info/game-info.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {IconsModule} from './icons/icons.module';
+import { IconsModule } from './icons/icons.module';
 import { ExitGameComponent } from './components/pages/game-lobby/sub-pages/exit-game/exit-game.component';
 import { LobbyFooterComponent } from './components/pages/game-lobby/partials/lobby-footer/lobby-footer.component';
 import { LobbyHeaderComponent } from './components/pages/game-lobby/partials/lobby-header/lobby-header.component';
@@ -41,6 +41,15 @@ import { EventContainerComponent } from './components/pages/game-lobby/sub-pages
 import { ChatContainerComponent } from './components/pages/game-lobby/sub-pages/overview/partials/chat-container/chat-container.component';
 import { FactionChatContainerComponent } from './components/pages/game-lobby/sub-pages/overview/partials/faction-chat-container/faction-chat-container.component';
 import { RoleProfileContainerComponent } from './components/pages/game-lobby/sub-pages/my-role/partials/role-profile-container/role-profile-container.component';
+import { GameStatsContainerComponent } from './components/pages/game-lobby/sub-pages/overview/partials/game-stats-container/game-stats-container.component';
+import { LastWishContainerComponent } from './components/pages/game-lobby/sub-pages/my-role/partials/last-wish-container/last-wish-container.component';
+import { MyRolePartialComponent } from './components/pages/game-lobby/sub-pages/my-role/partials/my-role-partial/my-role-partial.component';
+import { SmallLoaderComponent } from './components/partials/small-loader/small-loader.component';
+import { RolesListComponent } from './components/pages/create-game/partials/roles-list/roles-list.component';
+import { CreateGameFormComponent } from './components/pages/create-game/partials/create-game-form/create-game-form.component';
+import { SelectedRolesListComponent } from './components/pages/create-game/partials/selected-roles-list/selected-roles-list.component';
+import { FactionCompanionListComponent } from './components/pages/game-lobby/sub-pages/my-role/partials/faction-companion-list/faction-companion-list.component';
+import { MainControlsComponent } from './components/pages/game-lobby/sub-pages/host-actions/partials/main-controls/main-controls.component';
 
 
 @NgModule({
@@ -77,7 +86,16 @@ import { RoleProfileContainerComponent } from './components/pages/game-lobby/sub
     EventContainerComponent,
     ChatContainerComponent,
     FactionChatContainerComponent,
-    RoleProfileContainerComponent
+    RoleProfileContainerComponent,
+    GameStatsContainerComponent,
+    LastWishContainerComponent,
+    MyRolePartialComponent,
+    SmallLoaderComponent,
+    RolesListComponent,
+    CreateGameFormComponent,
+    SelectedRolesListComponent,
+    FactionCompanionListComponent,
+    MainControlsComponent,
   ],
     imports: [
         BrowserModule,

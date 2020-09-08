@@ -1,0 +1,36 @@
+.classified{
+}
+
+.alignment-box{
+  display: inline-block;
+  height: 1.25rem;
+  width: 1.25rem;
+  border-radius: 4px;
+  background-color: gray;
+  margin-right: 3px;
+}
+
+.jumbotron-image{
+  background-image: url("/assets/img/mafia-logo-square-transparant.png");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: relative;
+
+}
+
+.bg-town{
+  background-color: var(--color-darker-green) !important;
+}
+
+.bg-mafia{
+  background-color: var(--color-darker-red) !important;
+}
+
+.bg-thirdp{
+  background-color: var(--color-darker-purple) !important;
+}
+
+.bg-werewolf{
+  background-color: var(--color-darker-brown) !important;;
+}

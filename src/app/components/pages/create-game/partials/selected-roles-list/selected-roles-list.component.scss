@@ -1,0 +1,38 @@
+.selected-roles-container{
+  min-height: 2.2rem;
+  max-height: 9rem;
+  min-width: 6rem;
+  max-width: 40rem;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  background-color: #446767;
+  overflow-y: scroll;
+  content: 'lol';
+  border-radius: 0.2em;
+}
+
+.role-name{
+  height: 2.3em;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.role-add{
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.role-remove{
+  cursor: pointer;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+
+}
+
+.control-icon{
+  height: 1.25em;
+  width: 1.25em;
+  font-size: 1.5em;
+}

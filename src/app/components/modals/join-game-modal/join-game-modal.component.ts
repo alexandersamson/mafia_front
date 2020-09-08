@@ -80,8 +80,10 @@ export class JoinGameModalComponent implements OnInit, OnDestroy {
     return this.editForm.controls;
   }
 
-  get formIsValid(): boolean{
-    return !this.editForm.invalid;
+  get formIsValid(): boolean {
+    if (this.editForm) {
+      return !this.editForm.invalid;
+    }
   }
 
   private setForm(): void{

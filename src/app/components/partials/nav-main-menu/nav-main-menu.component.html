@@ -1,17 +1,21 @@
 <div *ngIf="!isInGameLobby()">
   <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav nav-pills">
-    <a [ngbNavItem]="1" class="navbar-brand" routerLink="/"><img width="134" height="32" alt="" src="assets/img/mafia-logo-small.png"></a>
-    <li [ngbNavItem]="1">
-      <a ngbNavLink routerLink="">Home</a>
-    </li>
-    <li [ngbNavItem]="2">
-      <a ngbNavLink routerLink="public-games">Join</a>
-    </li>
+    <a [ngbNavItem]="1" class="navbar-brand" routerLink="/"><img width="120" alt="" src="assets/img/mafia-logo-small.png"></a>
+    <ng-container *ngIf="(playerContextService.getCurrentPlayer() | async)?.inGame?.gid; else otherItems">
+      <li [ngbNavItem]="1">
+        <a ngbNavLink routerLink="game-lobby">Return to game</a>
+      </li>
+    </ng-container>
+    <ng-template #otherItems>
+      <li [ngbNavItem]="1">
+        <a ngbNavLink routerLink="public-games">Join</a>
+      </li>
+      <li [ngbNavItem]="2">
+        <a ngbNavLink routerLink="create-game">Create</a>
+      </li>
+    </ng-template>
     <li [ngbNavItem]="3">
-      <a ngbNavLink routerLink="create-game">Host</a>
-    </li>
-    <li [ngbNavItem]="4">
-      <a ngbNavLink routerLink="create-game">Host</a>
+      <a ngbNavLink routerLink="info-page">Info</a>
     </li>
   </ul>
 </div>

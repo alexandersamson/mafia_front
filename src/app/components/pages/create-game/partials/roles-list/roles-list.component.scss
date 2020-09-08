@@ -1,0 +1,11 @@
+.selection-box{
+  cursor: pointer;
+  user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+.role-element{
+  border-radius: 0.2em;
+}

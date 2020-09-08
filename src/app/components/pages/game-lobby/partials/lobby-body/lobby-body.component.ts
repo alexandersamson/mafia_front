@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./lobby-body.component.scss']
 })
 export class LobbyBodyComponent implements OnInit {
-
+  activeSubLink = 1;
   constructor() { }
 
   ngOnInit(): void {

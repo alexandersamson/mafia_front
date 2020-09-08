@@ -20,16 +20,32 @@
   font-size: 0.72rem;
 }
 
+.bg-name-badge {
+  background-color: var(--color-soft-gray) !important;
+}
+
+.badge-border-admin{
+  background-color:var(--color-soft-red) !important;
+}
+
+.badge-border-mod{
+  background-color: var(--color-soft-yellow) !important;
+}
+
 .host {
-  background-color: lightblue;
+  background-color: var(--color-soft-blue) !important;
+}
+
+.alive{
+  background-color: var(--color-soft-green) !important;
 }
 
 .dead {
-  opacity: 0.5;
+  background-color: var(--color-status-dead) !important;
 }
 
 .offline {
-  opacity: 0.5;
+  opacity: 0.40;
 }
 
 .connection-icon{

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {GameOverview} from '../../../../../models/game-models/game-overview-model';
 import {BehaviorSubject} from 'rxjs';
 
@@ -7,7 +7,7 @@ import {BehaviorSubject} from 'rxjs';
   templateUrl: './lobby-header.component.html',
   styleUrls: ['./lobby-header.component.scss']
 })
-export class LobbyHeaderComponent implements OnInit {
+export class LobbyHeaderComponent implements OnInit, OnDestroy {
    private $gameOverview = new BehaviorSubject<GameOverview>(new GameOverview(null));
 
   @Input()
@@ -49,12 +49,16 @@ export class LobbyHeaderComponent implements OnInit {
       this.gameOverview.status &&
       this.gameOverview.currentPhase &&
       this.gameOverview.currentPhase.name) {
-      if (this.gameOverview.status === 'ongoing'){
+      if (this.gameOverview.status.toLowerCase() === 'ongoing'){
         return this.gameOverview.currentPhase.name + ' ' + this.gameOverview.countDays;
       }
       return this.gameOverview.status.replace(/^\w/, chr => chr.toUpperCase());
     }
     return '...';
+  }
+
+  ngOnDestroy(): void {
+    this.$gameOverview.unsubscribe();
   }
 
 }

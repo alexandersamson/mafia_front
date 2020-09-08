@@ -1,1 +1,6 @@
-<p>create-game works!</p>
+<ng-container *ngIf="!isLoading; else loading">
+  <app-create-game-form></app-create-game-form>
+</ng-container>
+<ng-template #loading>
+  <app-small-loader></app-small-loader>
+</ng-template>

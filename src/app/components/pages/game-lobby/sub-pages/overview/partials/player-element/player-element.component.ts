@@ -9,7 +9,7 @@ import {ApiService} from '../../../../../../../services/api.service';
 })
 export class PlayerElementComponent implements OnInit {
 
-  @Input player: PlayerInGameOverview;
+  @Input() player: PlayerInGameOverview;
 
   constructor(public apiService: ApiService) { }
 

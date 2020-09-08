@@ -18,7 +18,12 @@ import {
   QuestionOctagon,
   HourglassSplit,
   Check2Circle,
-  WifiOff
+  WifiOff,
+  DashSquareFill,
+  PlusSquareFill,
+  PlayFill,
+  StopFill,
+  PauseFill
 
 } from 'ng-bootstrap-icons/icons';
 
@@ -40,6 +45,11 @@ const icons = {
   HourglassSplit,
   Check2Circle,
   WifiOff,
+  DashSquareFill,
+  PlusSquareFill,
+  PlayFill,
+  StopFill,
+  PauseFill
 };
 
 @NgModule({

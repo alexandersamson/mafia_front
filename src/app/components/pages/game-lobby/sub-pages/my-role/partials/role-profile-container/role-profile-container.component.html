@@ -1,1 +1,11 @@
-<p>role-profile-container works!</p>
+<h6 class="card-header px-1 py-0 bg-primary text-light">MY ROLE</h6>
+<div class="card-body pt-1 pl-1 pr-1 pb-2">
+  <div class="card-text">
+    <app-my-role-partial
+      [roleData]="seatAndRoleOverview?.role"
+      [factionData]="seatAndRoleOverview?.faction"
+      [abilitiesData]="seatAndRoleOverview?.abilities"
+      [factionCompanionsData]="seatAndRoleOverview?.factionCompanions">
+    </app-my-role-partial>
+  </div>
+</div>

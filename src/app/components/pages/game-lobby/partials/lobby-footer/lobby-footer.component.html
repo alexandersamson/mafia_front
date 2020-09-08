@@ -1,5 +1,10 @@
-<div class="small-footer fixed-bottom justify-content-center text-center">powered by:
-  <a href ="{{apiLink}}">Mafia API</a> | API version {{this.apiService.getApiVersion() | async}}
+<div class="small-footer fixed-bottom justify-content-center text-center">Powered by:
+  <ng-container *ngIf="this.apiService.getMeta() | async as meta; else genericFooter">
+    <a href ="{{meta.apiLink}}">{{meta.apiName}}</a> | API version {{meta.version}}
+  </ng-container>
+  <ng-template #genericFooter>
+    Powered by Mafia API
+  </ng-template>
 </div>
 
 

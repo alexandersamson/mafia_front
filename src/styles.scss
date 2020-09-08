@@ -4,7 +4,10 @@ $primary: #cc0052;
 $light: #ffe6f0;
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
-body{background-color: #181818}
 
+@import '_vars.scss';
 
-html, body { height: 100%; }
+html, body {
+  background-color: #181818;
+  overflow-anchor: none;
+}

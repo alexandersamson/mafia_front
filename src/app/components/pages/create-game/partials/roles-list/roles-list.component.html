@@ -1,0 +1,19 @@
+<ng-container *ngIf="roles && roles.length > 1; else loading">
+    <ng-container *ngFor="let faction of roles">
+      <div class="d-inline-block m-2 p-0 align-top selection-box card">
+        <div class="card-header bg-dark m-0 p-1">
+          {{faction[0]}}
+        </div>
+        <div class="card-body bg-dark m-0 p-1">
+          <ng-container *ngFor="let role of faction[1]">
+            <div class="p-1 role-element" *ngIf="role.faction" style="background-color:{{role.faction.color}};" (click)="callParent(role.rid)">
+              <span class="text-light">{{role.name}}</span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+</ng-container>
+<ng-template #loading>
+  <app-small-loader [text]="'Loading roles...'"></app-small-loader>
+</ng-template>

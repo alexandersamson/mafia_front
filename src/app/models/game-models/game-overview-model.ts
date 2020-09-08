@@ -1,4 +1,4 @@
-import {GamePhase} from '../game-phase.model';
+import {GamePhase} from '../game-phase-models/game-phase.model';
 
 export class GameOverview {
   public gid: number;
@@ -25,8 +25,8 @@ export class GameOverview {
     this.hostKeepsTime = game.hostKeepsTime ?? null;
     this.pausedTimeLeft = game.pausedTimeLeft ?? 0;
     this.nextPhaseTimestamp = game.nextPhaseTimestamp ?? 0;
-    this.startPhase = game.startPhase ?? '[unknown]';
-    this.currentPhase = game.currentPhase ?? '[unknown]';
+    this.startPhase = game.startPhase ?? null;
+    this.currentPhase = game.currentPhase ?? null;
     this.isPublicListed = game.isPublicListed ?? 0;
     this.showGameRoles = game.showGameRoles ?? false;
     this.hasPinCode = game.hasPinCode ?? false;

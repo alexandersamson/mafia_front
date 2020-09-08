@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import { Adapter } from '../../common/adapter';
 import {Faction} from '../faction.model';
 import {Player} from '../player-models/player.model';
-import {GamePhase} from '../game-phase.model';
+import {GamePhase} from '../game-phase-models/game-phase.model';
 
 export class Game {
   constructor(

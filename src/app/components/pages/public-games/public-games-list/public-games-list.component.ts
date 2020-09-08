@@ -1,10 +1,10 @@
 import {Component, OnInit, Output, EventEmitter, OnDestroy} from '@angular/core';
-import {ApiService} from '../../../services/api.service';
-import {Package, PackageAdapter} from '../../../models/package.model';
-import {Game, GameAdapter} from '../../../models/game-models/game.model';
-import {Pagination, PaginationAdapter} from '../../../models/pagination.model';
-import {ApiCall} from '../../../models/api-call.model';
-import {Globals} from '../../../common/globals';
+import {ApiService} from '../../../../services/api.service';
+import {Package, PackageAdapter} from '../../../../models/package.model';
+import {Game, GameAdapter} from '../../../../models/game-models/game.model';
+import {Pagination, PaginationAdapter} from '../../../../models/pagination.model';
+import {ApiCall} from '../../../../models/api-call.model';
+import {Globals} from '../../../../common/globals';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -27,8 +27,10 @@ export class PublicGamesListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.apiCall = new ApiCall(Globals.getJoinableGamesPageCall);
     this.subscription.add(this.apiService.getData(this.apiCall).subscribe((packet => {
-      this.games = packet.data.map((data) => this.gameAdapter.adapt(data));
-      this.paginationEvent.emit(packet.pagination.map((data: {}) => this.paginationAdapter.adapt(data))[0]);
+      if (packet.data) {
+        this.games = packet.data.map((data) => this.gameAdapter.adapt(data));
+        this.paginationEvent.emit(packet.pagination.map((data: {}) => this.paginationAdapter.adapt(data))[0]);
+      }
     })));
   }
 

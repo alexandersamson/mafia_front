@@ -12,4 +12,8 @@ export class PlayerCookiesService {
   public getPlayerToken(): string{
     return this.cookieService.get(Globals.playerTokenPropertyAndCookieName);
   }
+
+  public destroyPlayerToken(){
+    this.cookieService.delete(Globals.playerTokenPropertyAndCookieName);
+  }
 }

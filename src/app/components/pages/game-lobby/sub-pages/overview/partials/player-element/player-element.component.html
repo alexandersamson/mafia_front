@@ -1,4 +1,4 @@
-<span class="text-nowrap  text-left badge w-100 label">
-  <span class="label-left text-light bg-primary p-1 px-2 {{(player.lastSeen + 60) < (apiService.getTimestamp() | async) ? 'offline' : ''}}">{{player.name}}<span class="discriminator">{{player.discriminator}}</span></span>
-  <span class="label-right text-dark p-1 px-2 {{!player.isAlive ? 'dead' : ''}} {{player.isHost ? 'host' : 'bg-light'}}">{{player.isHost ? 'Host' : player.isAlive ? 'Alive' : 'Dead'}}</span>
+<span class="text-nowrap  text-left badge w-100 label {{(player.lastSeen + 15) < (apiService.getMeta() | async).timestamp ? 'offline' : ''}}">
+  <span class="label-left {{(player.isSuperadmin || player.isAdmin) ? 'badge-border-admin' : player.isModerator ? 'badge-border-mod' : ''}} bg-name-badge text-dark p-1 px-2">{{player.name}}<span class="discriminator">{{player.discriminator}}</span></span>
+  <span class="label-right text-dark p-1 px-2 {{player.isHost ? 'host' : !player.isAlive ? 'dead' : 'alive'}}">{{player.isHost ? 'Host' : player.isAlive ? 'Alive' : 'Dead'}}</span>
 </span>

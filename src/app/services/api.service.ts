@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable, of, partition} from 'rxjs';
 import { ApiCall } from '../models/api-call.model';
 import { Globals } from '../common/globals';
-import { map } from 'rxjs/operators';
+import {concatMap, map, mergeMap} from 'rxjs/operators';
 import {Package, PackageAdapter} from '../models/package.model';
 import {DebugMessageService} from './debug-message.service';
 import {PlayerCookiesService} from './player-cookies.service';
@@ -26,7 +26,7 @@ export class ApiService {
 
   getData(apiCall: ApiCall): Observable<Package>{
     apiCall.playerToken = this.playerCookiesService.getPlayerToken();
-    return this.http.post(this.url, JSON.stringify(apiCall)).pipe(
+    return this.http.post(this.url + '?' + apiCall.request, JSON.stringify(apiCall)).pipe(
       map((data: Package) => {
         this.debugMsgService.addMessagesToBuffer(data.messages);
         if (data.error){
@@ -48,11 +48,7 @@ export class ApiService {
     );
   }
 
-  getApiVersion(): Observable<string>{
-    return of(this.meta.apiName);
-  }
-
-  getTimestamp(): Observable<number>{
-    return of(this.meta.timestamp);
+  getMeta(): Observable<Meta>{
+    return of(this.meta);
   }
 }

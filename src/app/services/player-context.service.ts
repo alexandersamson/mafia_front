@@ -26,7 +26,7 @@ export class PlayerContextService {
 
   public getCurrentPlayer(): Observable<CurrentPlayer> {
     const token = this.playerCookiesService.getPlayerToken();
-    console.log('requested getCurrentPlayer');
+    // console.log('requested getCurrentPlayer');
     if (token === '' || token === null || token === undefined) {
       return of(null);
     }
@@ -35,7 +35,7 @@ export class PlayerContextService {
 
   public isLoggedIn(): Observable<boolean>{
     const player = this.$currentPlayer.getValue();
-    console.log('requested isLoggedIn');
+    // console.log('requested isLoggedIn');
     if (player && player.id){
       if (player.id > 0){
         return of(true);
@@ -47,12 +47,16 @@ export class PlayerContextService {
   private getCurrentPlayerDataInterval(): void {
     const apiCall = new ApiCall(Globals.getPlayerByToken);
     this.subscription.add(
-      interval(1000).pipe(
+      interval(1500).pipe(
         startWith(0),
         switchMap(
           () => this.apiService.getData(apiCall)
         )
-      ).subscribe(x => this.$currentPlayer.next( x.data[0] as CurrentPlayer))
+      ).subscribe(x => {
+        if (!x.data || !x.data[0]){
+          this.playerCookiesService.destroyPlayerToken();
+        }
+        this.$currentPlayer.next( x.data[0] as CurrentPlayer); })
     );
   }
 
@@ -64,6 +68,11 @@ export class PlayerContextService {
 
   public getCpPlayersOverview(): Observable<Package> {
     const apiCall = new ApiCall(Globals.getCpPlayersOverview);
+    return this.apiService.getData(apiCall);
+  }
+
+  public getCpMyRoleOverview(): Observable<Package> {
+    const apiCall = new ApiCall(Globals.getCpRoleDetails);
     return this.apiService.getData(apiCall);
   }
 

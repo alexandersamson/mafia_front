@@ -1,0 +1,67 @@
+<form [formGroup]="createGameForm">
+  <div class="card p-0 mb-2 bg-dark">
+    <label>
+    <div class="card-header p-0 pl-2">Enter a name for your game</div>
+    <div class="card-body p-2">
+      <input type="text" formControlName="name"><br>
+      <span class="text-info"><i>4-20 characters, alphanumeric</i></span>
+    </div>
+    </label><br/>
+  </div>
+  <div class="card p-0 mb-2 bg-dark">
+    <label>
+      <div class="card-header p-0 pl-2">Select some roles</div>
+      <div class="card-body p-2">
+        <app-selected-roles-list [$roles]="getSelectedRolesAsObservable()" (addRid)="addToSelected($event)" (removeRid)="removeFromSelected($event)"></app-selected-roles-list>
+        <app-roles-list (addRid)="addToSelected($event)"></app-roles-list>
+      </div>
+    </label>
+  </div>
+  <div formGroupName="options">
+    <div class="card p-0 mb-2 bg-dark">
+      <div class="card-header p-0 pl-2">Extra game options</div>
+      <div class="card-body">
+        <label>
+          Is public listed
+          <input type="checkbox" formControlName="isPublicListed">
+        </label><br>
+        <label>
+          Has pin code
+          <input type="checkbox" formControlName="hasPinCode">
+        </label><br>
+        <ng-container *ngIf="createGameForm?.value.options.hasPinCode">
+          <label>
+            Pin code
+            <input type="text" formControlName="pinCode"><br>
+          </label><br>
+        </ng-container>
+        <label>
+          Starting Phase
+          <select formControlName="startPhaseId" id="startPhaseId">
+            <option *ngFor="let phase of $gamePhases | async" [value]="phase.id">
+              {{phase.name}}
+            </option>
+          </select>
+        </label><br>
+      </div>
+    </div>
+  </div>
+  <div class="card p-0 mb-2 bg-dark">
+    <label>
+      <div class="card-header p-0 pl-2">Are you ready?</div>
+      <div class="card-body p-2">
+        <button [disabled]="!selectedRolesAreValid()" class="btn btn-lg btn-primary" type="button" (click)="onSubmit()">Create game</button>
+      </div>
+      <ng-container *ngIf="errors">
+      <div class="errors text-warning">
+        <span class="pl-2">You can't create this game yet:</span>
+        <ul>
+          <ng-container *ngFor="let error of errors">
+            <li><span class="text-warning d-block">{{error}}</span></li>
+          </ng-container>
+        </ul>
+      </div>
+      </ng-container>
+    </label>
+  </div>
+</form>

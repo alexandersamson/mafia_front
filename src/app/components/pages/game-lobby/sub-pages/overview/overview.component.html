@@ -1,8 +1,19 @@
 <div class="row mt-3">
   <div class="col-lg-9 col-md-8">
-    <app-event-container></app-event-container>
+    <div class="card bg-dark text-primary mb-3">
+      <app-event-container></app-event-container>
+    </div>
+    <div class="card bg-dark text-primary mb-3">
+      <app-chat-container></app-chat-container>
+    </div>
+    <div class="card bg-dark text-primary mb-3">
+      <app-faction-chat-container></app-faction-chat-container>
+    </div>
   </div>
   <div class="col-lg-3 col-md-4">
+    <div class="card bg-dark text-primary mb-3">
+      <app-game-stats-container></app-game-stats-container>
+    </div>
     <div class="card bg-dark text-primary">
       <app-player-container [playerInGameOverview]="playerInGameOverview"></app-player-container>
     </div>
