@@ -23,7 +23,12 @@ import {
   PlusSquareFill,
   PlayFill,
   StopFill,
-  PauseFill
+  PauseFill,
+  SkipBackwardFill,
+  SkipForwardFill,
+  EyeFill,
+  EyeSlashFill,
+  ShieldShaded
 
 } from 'ng-bootstrap-icons/icons';
 
@@ -49,7 +54,12 @@ const icons = {
   PlusSquareFill,
   PlayFill,
   StopFill,
-  PauseFill
+  PauseFill,
+  SkipBackwardFill,
+  SkipForwardFill,
+  EyeFill,
+  EyeSlashFill,
+  ShieldShaded
 };
 
 @NgModule({

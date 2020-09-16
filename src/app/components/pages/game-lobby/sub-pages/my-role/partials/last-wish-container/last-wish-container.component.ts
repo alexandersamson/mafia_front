@@ -12,4 +12,9 @@ export class LastWishContainerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onSubmit(){
+
+  }
 }
+
+

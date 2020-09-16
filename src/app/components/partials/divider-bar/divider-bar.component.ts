@@ -8,6 +8,8 @@ import {ProgressBar} from '../../../models/progress-bar.model';
 })
 export class DividerBarComponent implements OnInit {
   @Input() barData: Array<ProgressBar>;
+  @Input() height = 24;
+  @Input() width = '100%';
 
   constructor() { }
 

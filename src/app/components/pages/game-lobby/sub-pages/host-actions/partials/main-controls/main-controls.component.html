@@ -1,6 +1,23 @@
 <h6 class="card-header px-1 py-0 bg-primary text-light">MAIN GAME CONTROLS</h6>
-<div class="card-body pt-1 pl-1 pr-1 pb-2">
-  <div class="card-text">
-    [Game Chat]
+<ng-container *ngIf="gameOverview">
+  Name:{{gameOverview.name}}<br />
+  Gid:{{gameOverview.gid}}<br />
+  Status:{{gameOverview.status}}<br />
+  Seats:{{gameOverview.usedSlots + gameOverview.availableSlots}}<br />
+  Players:{{gameOverview.usedSlots}}<br />
+  Phase:{{gameOverview.currentPhase.name}}<br />
+  Next Phase:{{gameOverview.currentPhase.nextPhaseId}}<br />
+  Cycle:{{gameOverview.countDays}}<br />
+  Public:{{gameOverview.isPublicListed}}<br />
+  PinCode:{{gameOverview.hasPinCode}}<br />
+  Roles Public:{{gameOverview.showGameRoles}}<br />
+  <div class="card-body pt-1 pl-1 pr-1 pb-2">
+    <div class="card-text">
+      <button class="btn btn-primary"><bi class="main-control-btn btn-play" name="play-fill"></bi></button>
+      <button class="btn btn-primary"><bi class="main-control-btn btn-play" name="skip-backward-fill"></bi></button>
+      <span></span>
+      <button class="btn btn-primary"><bi class="main-control-btn btn-play" name="skip-forward-fill"></bi></button>
+    </div>
   </div>
-</div>
+</ng-container>
+

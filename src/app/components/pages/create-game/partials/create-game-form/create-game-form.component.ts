@@ -31,8 +31,12 @@ export class CreateGameFormComponent implements OnInit, OnDestroy {
   public fetchedAllRoles = false;
   public errors: Array<string>;
 
-  constructor(private formBuilder: FormBuilder, private roleService: RoleServiceService, private gameService: GameServiceService, private apiService: ApiService) {
-  }
+  constructor(
+    private formBuilder: FormBuilder,
+    private roleService: RoleServiceService,
+    private gameService: GameServiceService,
+    private apiService: ApiService
+  ) {}
 
   ngOnInit(): void {
     this.getRoles();
@@ -61,15 +65,17 @@ export class CreateGameFormComponent implements OnInit, OnDestroy {
 
   selectedRolesAreValid(): boolean{
     this.errors = [];
-    if (!this.createGameForm.value['name']){
+    if (!this.createGameForm.value.name){
       this.errors.push('No name given.');
-    } else if (this.createGameForm.value['name'].length < 4){
+    } else if (this.createGameForm.value.name.length < 4){
       this.errors.push('Name shorter than 4 charachters minimum.');
-    } else if (this.createGameForm.value['name'].length > 20){
+    } else if (this.createGameForm.value.name.length > 20){
       this.errors.push('Name longer than 20 charachters maximum.');
     }
     if (this.roles.length < 3){
       this.errors.push('Less than 3 roles selected');
+    } else if (this.roles.length > 32){
+      this.errors.push('More than 32 roles selected');
     } else {
       const factions = [];
       this.roles.map(x => {
@@ -120,8 +126,7 @@ export class CreateGameFormComponent implements OnInit, OnDestroy {
     payloadModel.roles = this.roles.map(x => x.rid);
     const apiCall = new ApiCall(Globals.createGame, payloadModel);
     this.apiService.getData(apiCall).subscribe(x => {
-      console.log(x);
-      if (x.data[0].gid as Game){
+      if (x.data && x.data[0] && (x.data[0]['gid'] as Game['gid'])){
         console.log('game ok');
       }
     });

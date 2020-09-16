@@ -1,0 +1,41 @@
+.parallelogram {
+  display: inline-block;
+  width: 0.55em;
+  height: 0.80em;
+  margin-right: 0.13em;
+  transform: skew(-20deg);
+}
+
+.fill-red{
+  background: var(--color-dark-red);
+}
+
+.fill-green{
+  background: var(--color-soft-green);
+}
+
+.text-green{
+  color: var(--color-soft-green);
+}
+
+.text-red{
+  color: var(--color-dark-red);
+}
+
+.outline-green{
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--color-soft-green);
+}
+
+.seats-left-text-box{
+  display: inline-block;
+  vertical-align: top;
+}
+
+.seats-left-text{
+  display: inline-block;
+  font-size: 0.90rem;
+  font-style: italic;
+  font-weight: lighter;
+}

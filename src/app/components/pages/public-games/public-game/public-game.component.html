@@ -2,15 +2,17 @@
   <div class="col-md-3">
     <div><h5>{{game.name}}</h5></div>
     <p>By: <a href="#" class="badge badge-light">{{game.creator?.name}}</a></p>
-    <p *ngIf="game.host">Host: <a href="#" class="badge badge-light">{{game.host.name}}</a></p>
   </div>
   <div class="col-md-2">
-    <h5><span class="badge badge-light">{{(game.availableSlots+game.usedSlots)}} seats</span></h5>
-    <p><span class="badge badge-light">{{game.availableSlots}} free</span></p>
+    <app-seats-counter-graph [graphData]="seatsGraphData"></app-seats-counter-graph>
   </div>
-  <div class="col-md-4">
-    <div><app-divider-bar [barData]="barData"></app-divider-bar></div>
-    <a href="#" class="badge badge-dark badge-custom" style="background:{{faction.color}}80;" *ngFor="let faction of game.factions">{{faction.name}}</a>
+  <div class="col-md-4" (click)="changeText = !changeText">
+    <ng-container *ngIf="!changeText">
+    <div><app-divider-bar [barData]="barData" [height]="18"></app-divider-bar></div>
+    </ng-container>
+    <ng-container *ngIf="changeText">
+    <div class="badge badge-dark badge-custom {{!changeText ? 'hidden' : ''}}" style="background:{{faction.color}}80;" *ngFor="let faction of game.factions">{{faction.name}}</div>
+    </ng-container>
   </div>
   <div class="col-md-3">
     <span class="col-3  d-md-none"></span>

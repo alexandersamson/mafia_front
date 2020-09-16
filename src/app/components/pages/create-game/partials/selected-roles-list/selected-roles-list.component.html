@@ -1,5 +1,16 @@
 <div class="selected-roles-container">
   <ng-container *ngIf="selectedRoles && selectedRoles.length > 0; else empty">
+    <div class="alert-dark">
+      <div class="d-block w-25 float-left">
+        <span class="d-block ml-1 mt-1 mr-0"><app-divider-bar [height]="17" [barData]="barData"></app-divider-bar></span>
+      </div>
+      <div class="clearfix">
+        <span class="badge badge-light player-counter ml-1">{{amountOfRoles}}</span>
+        <ng-container *ngFor="let verdict of getGameBalanceVerdict()">
+        <span class="badge badge-secondary player-counter ml-1">{{verdict}}</span>
+        </ng-container>
+      </div>
+    </div>
     <ng-container *ngFor="let role of selectedRoles">
       <div class="d-inline-block">
         <span class="badge ml-1 badge-dark role-remove" (click)="callParentRemove(role?.rid)">
@@ -15,6 +26,6 @@
     </ng-container>
   </ng-container>
   <ng-template #empty>
-    <span class="p-2 text-info"><i>Select at least 3 roles from at least 2 different factions from the list below</i></span>
+    <span class="p-2 text-info"><i>Select between 3 and 32 roles from at least 2 different factions from the list below</i></span>
   </ng-template>
 </div>

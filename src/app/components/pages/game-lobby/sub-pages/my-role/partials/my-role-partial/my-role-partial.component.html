@@ -1,54 +1,65 @@
 <div class="jumbotron-fluid text-light jumbotron-image">
-  <div class="text-center" *ngIf="role$ | async as role">
-    <div class="classified">
-      <h2>{{role.name}}</h2>
-      <h5><i>{{role.type}}</i></h5>
-      <p class="small text-left px-3">{{role.description}}</p>
-    </div>
-  <div class="card bg-dark m-2">
-    <div class="card-header text-dark small px-1 py-0 bg-light">
-      FACTION
-    </div>
-    <ng-container *ngIf="faction$ | async as faction; else loadingFaction">
-    <div class="bg-{{faction.fid}} card-body bg-secondary ">
-      <div class="text-left text-light">
-        <div class="classified">
-          <h3><div class="alignment-box" style="background-color:{{faction.color}}"></div>{{faction.name}}</h3>
-          <p class="small text-left">{{faction.description}} {{faction.winAsWholeFaction ? 'You win this game if all objectives of the faction are met.' : 'You win if your individual objectives are met'}}</p>
-        <ng-container *ngIf="(factionCompanionsData$ | async)?.length > 0">
-          <h5>Companions</h5>
-          <app-faction-companion-list [factionCompanionsData]="factionCompanionsData$"></app-faction-companion-list>
-        </ng-container>
-        </div>
+  <div class="text-center" *ngIf="(role$ | async) as role; else loadingRole">
+      <div class="classified">
+        <h2>{{role.name}}</h2>
+        <h5><i>{{role.type}}</i></h5>
+        <p class="small text-left px-3">{{role.description}}</p>
       </div>
-    </div>
-    </ng-container>
-  </div>
-    <ng-container *ngIf="abilities$ | async as abilities; else noAbilities">
-      <div class="card bg-dark m-2">
-        <div class="card-header text-dark small px-1 py-0 bg-light">
-          ABILITIES
-        </div>
-        <div class="card-body bg-secondary">
-          <ng-container *ngFor="let abilitity of abilities">
-            <div class="text-left text-light">
-              <div class="classified">
-                <h5><b>{{abilitity?.name}}</b></h5>
-                <p class="small text-left">{{abilitity?.description}}</p>
-              </div>
-            </div>
+    <div class="card bg-dark m-2">
+      <div class="card-header text-dark small px-1 py-0 bg-light">
+        FACTION
+      </div>
+      <ng-container *ngIf="faction$ | async as faction; else loadingFaction">
+      <div class="bg-{{faction.fid}} card-body bg-secondary ">
+        <div class="text-left text-light">
+          <div class="classified">
+            <h3><div class="alignment-box" style="background-color:{{faction.color}}"></div>{{faction.name}}</h3>
+            <p class="small text-left">{{faction.description}} {{faction.winAsWholeFaction ? 'You win this game if all objectives of the faction are met.' : 'You win if your individual objectives are met'}}</p>
+          <ng-container *ngIf="(factionCompanionsData$ | async)?.length > 0">
+            <h5 class="pl-1">Members</h5>
+            <app-faction-companion-list [factionCompanionsData]="factionCompanionsData$"></app-faction-companion-list>
           </ng-container>
-          <button class="btn small px-2 py-0 btn-primary" [routerLink]="'/'+thisPage+'/'+playerActionsSubPage" type="button">Action Center<bi class="text-light" name="lightning-fill"></bi> </button>
+          </div>
         </div>
       </div>
-    </ng-container>
+      </ng-container>
+    </div>
+      <ng-container *ngIf="abilities$ | async as abilities; else noAbilities">
+        <div class="card bg-dark m-2">
+          <div class="card-header text-dark small px-1 py-0 bg-light">
+            ABILITIES
+          </div>
+          <div class="card-body bg-secondary">
+            <ng-container *ngFor="let abilitity of abilities">
+              <div class="text-left text-light">
+                <div class="classified">
+                  <h5><bi title="{{abilitity?.mustBeActivated ? 'Active ability' : 'Passive ability'}}" name="{{abilitity?.mustBeActivated ? 'lightning-fill' : 'shield-shaded'}}"></bi><b>{{abilitity?.name}}</b></h5>
+                  <p class="small text-left">{{abilitity?.description}}</p>
+                </div>
+              </div>
+            </ng-container>
+            <button class="btn small px-2 py-0 btn-primary" [routerLink]="'/'+thisPage+'/'+playerActionsSubPage" type="button">Action Center<bi class="text-light" name="lightning-fill"></bi> </button>
+          </div>
+        </div>
+      </ng-container>
   </div>
 </div>
 <ng-template #loadingRole>
-  <app-small-loader [text]="'Waiting for role'"></app-small-loader>
+  <ng-container *ngIf="knowsOwnRole !== false; else waitForRole">
+    <app-small-loader [text]="'Waiting for role'"></app-small-loader>
+  </ng-container>
 </ng-template>
 <ng-template #loadingFaction>
   <app-small-loader [text]="'Waiting for faction'"></app-small-loader>
 </ng-template>
 <ng-template #noAbilities>
+</ng-template>
+<ng-template #waitForRole>
+  <div class="text-center">
+    <div class="card bg-dark">
+      <div class="card-header">Notification</div>
+      <div class="card-body text-left"><br />You cannot see your own role.<br />When you are allowed to see your role, it will be displayed here.<br /><br /></div>
+      <div class="card-footer"></div>
+    </div>
+  </div>
 </ng-template>

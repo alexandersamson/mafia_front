@@ -3,6 +3,7 @@ import {interval, pipe, Subscription} from 'rxjs';
 import {PlayerContextService} from '../../../services/player-context.service';
 import {mergeMap, startWith} from 'rxjs/operators';
 import {GameOverview} from '../../../models/game-models/game-overview-model';
+import {GameServiceService} from '../../../services/game-service.service';
 
 @Component({
   selector: 'app-game-lobby',
@@ -11,27 +12,15 @@ import {GameOverview} from '../../../models/game-models/game-overview-model';
 })
 
 export class GameLobbyComponent implements OnInit, OnDestroy{
-  private subscription: Subscription = new Subscription();
-  public gameOverview: GameOverview;
-
-  constructor(private playerContext: PlayerContextService) { }
-
-  ngOnInit(): void {
-    this.startInterval();
+  constructor(private playerContext: PlayerContextService, private gameService: GameServiceService) {
   }
 
-  public startInterval(): void{
-    this.subscription.add(interval(1500).pipe(startWith(0),
-      mergeMap(() => this.playerContext.getCpGameOverview()
-      )).subscribe(pack => {
-        if (pack && pack.data && pack.data[0]){
-          this.gameOverview = new GameOverview(pack.data[0]);
-        }
-      })
-    );
+  ngOnInit(): void {
+    this.gameService.startGameOverViewInterval();
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.gameService.stopGameViewInterval();
   }
+
 }

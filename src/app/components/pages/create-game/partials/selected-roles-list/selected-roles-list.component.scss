@@ -1,15 +1,14 @@
 .selected-roles-container{
-  min-height: 2.2rem;
-  max-height: 9rem;
+  min-height: 8rem;
+  max-height: 16rem;
   min-width: 6rem;
   max-width: 40rem;
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
-  background-color: #446767;
+  background-color: #262626;
   overflow-y: scroll;
-  content: 'lol';
   border-radius: 0.2em;
 }
 

@@ -1,10 +1,10 @@
 <div class="miniBar">
   <div *ngFor="let bar of barData; let first = first; let last = last">
-    <div class="miniBarProgress miniSegment"
+    <div class="miniBarProgress miniSegment" [ngStyle]="{'height.px':height, 'line-height.px':height}"
          ngbTooltip="{{bar.name+' ('+(bar.value)+')'}}"
          style="
-          {{first ? 'border-radius: 0.4rem 0 0 0.4rem;' : 'border-left: 1px solid #FFFFFF;'}}
-          {{last ? 'border-radius: 0 0.4rem 0.4rem 0;' : 'border-right: 1px solid #FFFFFF;'}}
+          {{first ? 'border-radius: 0.2rem 0 0 0.2rem;' : 'border-left: 1px solid #FFFFFF;'}}
+          {{barData.length === 1 ? 'border-radius: 0.2rem 0.2rem 0.2rem 0.2rem;' : last ? 'border-radius: 0 0.2rem 0.2rem 0;' : 'border-right: 1px solid #FFFFFF;'}}
           left:{{bar.previous}}{{bar.previous == 0 ? 'rem' : '%'}};
           width:{{bar.fraction}}%;
           background-color:{{bar.color}};

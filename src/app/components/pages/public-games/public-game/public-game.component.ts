@@ -10,6 +10,7 @@ import {CurrentPlayer} from '../../../../models/player-models/current-player.mod
 import {Router} from '@angular/router';
 import {Globals} from '../../../../common/globals';
 import {Subscription} from 'rxjs';
+import {SeatsCounterGraphDataModel} from '../../../../models/generic-models/seats-counter-graph-data.model';
 
 
 @Component({
@@ -21,7 +22,10 @@ export class PublicGameComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   @Input() game: Game;
   public barData: Array<ProgressBar>;
+  public seatsGraphData: SeatsCounterGraphDataModel;
   public isLoading = false;
+  public changeText = false;
+
 
   constructor(
     private router: Router,
@@ -32,6 +36,7 @@ export class PublicGameComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.barData = this.powerlevelToProgress.getProgressBarData(this.game.factions);
+    this.seatsGraphData = new SeatsCounterGraphDataModel(this.game.availableSlots, this.game.usedSlots, true);
   }
 
   joinGame(game: Game): void{

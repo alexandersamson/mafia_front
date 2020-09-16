@@ -1,0 +1,22 @@
+<div class="counter-container" (mouseenter)="changeText=true" (mouseleave)="changeText=false">
+  <ng-container *ngIf="graphData.totalSeats > 0">
+    <ng-container *ngIf="changeText === false || graphData.showText == false">
+      <ng-container *ngFor="let i of graphData.usedSeats|forCount">
+        <div class="parallelogram {{graphData.freeSeats === 0 ? 'fill-red' : 'fill-green'}}"></div>
+      </ng-container>
+      <ng-container *ngFor="let i of graphData.freeSeats|forCount">
+        <div class="parallelogram outline-green"></div>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngIf="graphData.showText === true && changeText === true">
+      <div class="seats-left-text-box">
+        <ng-container *ngIf="graphData.freeSeats > 0">
+          <div class="seats-left-text text-green">{{graphData.freeSeats + graphData.usedSeats}} seats</div>
+        </ng-container>
+        <ng-container *ngIf="graphData.freeSeats === 0">
+          <div class="seats-left-text text-red">full!</div>
+        </ng-container>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

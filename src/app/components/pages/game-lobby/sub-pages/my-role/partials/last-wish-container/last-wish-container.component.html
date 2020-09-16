@@ -1,6 +1,10 @@
 <h6 class="card-header px-1 py-0 bg-primary text-light">LAST WILL</h6>
 <div class="card-body pt-1 pl-1 pr-1 pb-2">
   <div class="card-text">
-    [LAST WILL]
+      <div class="form-group">
+        <textarea maxlength="150" placeholder="Start typing here. (Max 150 chars.)" class="last-will" id="exampleFormControlTextarea1" cols="33" rows="5"></textarea><br />
+        <button type="button" class="btn btn-secondary mr-1" (click)="onSubmit">Clear</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmit">&nbsp;&nbsp;Save&nbsp;&nbsp;</button>
+      </div>
   </div>
 </div>

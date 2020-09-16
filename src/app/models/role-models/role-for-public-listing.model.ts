@@ -6,11 +6,13 @@ export class RoleForPublicListing {
   public rid: string;
   public name: string;
   public type: string;
-  public balancePower: string;
+  public balancePower: number;
   public description: string;
   public imageUrl: string;
   public faction: FactionSmallest;
   public abilities: Array<AbilityForMyRoleOverview>;
+
+  public count = 0;
 
 
   public constructor(model: any) {
@@ -21,7 +23,7 @@ export class RoleForPublicListing {
     this.rid = model.rid ?? null;
     this.name = model.name ?? 'No Name';
     this.type = model.type ?? 'No Type';
-    this.balancePower = model.balancePower ?? 0;
+    this.balancePower = model.balancePower.valueOf() ?? 0;
     this.description = model.description ?? 'No description.';
     this.imageUrl = model.imageUrl ?? 'roles/default';
     this.faction = model.faction ?? null;

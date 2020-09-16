@@ -52,7 +52,7 @@
       <div class="card-body p-2">
         <button [disabled]="!selectedRolesAreValid()" class="btn btn-lg btn-primary" type="button" (click)="onSubmit()">Create game</button>
       </div>
-      <ng-container *ngIf="errors">
+      <ng-container *ngIf="errors && errors.length > 0; else validated">
       <div class="errors text-warning">
         <span class="pl-2">You can't create this game yet:</span>
         <ul>
@@ -62,6 +62,11 @@
         </ul>
       </div>
       </ng-container>
+      <ng-template #validated>
+        <div class="errors text-success">
+          <span class="pl-2">You are ready to go!</span>
+        </div>
+      </ng-template>
     </label>
   </div>
 </form>

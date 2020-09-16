@@ -1,6 +1,7 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {GameOverview} from '../../../../../models/game-models/game-overview-model';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Subscription} from 'rxjs';
+import {GameServiceService} from '../../../../../services/game-service.service';
 
 @Component({
   selector: 'app-lobby-header',
@@ -8,20 +9,28 @@ import {BehaviorSubject} from 'rxjs';
   styleUrls: ['./lobby-header.component.scss']
 })
 export class LobbyHeaderComponent implements OnInit, OnDestroy {
-   private $gameOverview = new BehaviorSubject<GameOverview>(new GameOverview(null));
+  private subscription: Subscription = new Subscription();
+  private gameOverview$ = new BehaviorSubject<GameOverview>(new GameOverview(null));
 
-  @Input()
   set gameOverview(value){
-    this.$gameOverview.next(value);
+    this.gameOverview$.next(value);
   }
 
   get gameOverview(): GameOverview{
-    return this.$gameOverview.getValue();
+    return this.gameOverview$.getValue();
   }
 
-  constructor() { }
+  constructor(private gameService: GameServiceService) { }
 
   ngOnInit(): void {
+    this.getGameOverview();
+  }
+
+  getGameOverview(): void{
+    this.subscription.add(
+      this.gameService.getGameOverview().subscribe(overview =>
+      this.gameOverview$.next(overview))
+    );
   }
 
   getGamePhaseIcon(): string{
@@ -58,7 +67,8 @@ export class LobbyHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.$gameOverview.unsubscribe();
+    this.subscription.unsubscribe();
+    this.gameOverview$.unsubscribe();
   }
 
 }

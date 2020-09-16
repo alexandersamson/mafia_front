@@ -21,8 +21,10 @@ export class MyRolePartialComponent implements OnInit {
 
   constructor() { }
 
+  @Input() knowsOwnRole = true;
+
   @Input() set roleData(value: RoleForMyRoleOverviewModel){
-    this.role$.next(value);
+      this.role$.next(value);
   }
 
   @Input() set factionData(value: FactionForMyRoleOverview){

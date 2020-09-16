@@ -50,6 +50,8 @@ import { CreateGameFormComponent } from './components/pages/create-game/partials
 import { SelectedRolesListComponent } from './components/pages/create-game/partials/selected-roles-list/selected-roles-list.component';
 import { FactionCompanionListComponent } from './components/pages/game-lobby/sub-pages/my-role/partials/faction-companion-list/faction-companion-list.component';
 import { MainControlsComponent } from './components/pages/game-lobby/sub-pages/host-actions/partials/main-controls/main-controls.component';
+import { SeatsCounterGraphComponent } from './components/partials/seats-counter-graph/seats-counter-graph.component';
+import { NgForByCountPipe } from './pipes/ng-for-by-count.pipe';
 
 
 @NgModule({
@@ -96,6 +98,8 @@ import { MainControlsComponent } from './components/pages/game-lobby/sub-pages/h
     SelectedRolesListComponent,
     FactionCompanionListComponent,
     MainControlsComponent,
+    SeatsCounterGraphComponent,
+    NgForByCountPipe,
   ],
     imports: [
         BrowserModule,
